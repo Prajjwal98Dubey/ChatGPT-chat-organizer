@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatGPT Chat Organizer</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1 class="title">Chat Organizer</h1>
+      <div class="header-actions">
+        <button id="addCurrentChat" class="btn btn-primary" title="Add Current Chat">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </button>
+        <button id="createFolder" class="btn btn-secondary" title="Create Folder">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+            <path d="M12 11v6M9 14h6"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search folders and chats..." class="search-input">
+      <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+    </div>
+
+    <div id="currentChatInfo" class="current-chat hidden">
+      <div class="current-chat-content">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        <span id="currentChatTitle">Current ChatGPT Chat</span>
+      </div>
+    </div>
+
+    <div class="folders-container">
+      <div id="foldersEmpty" class="empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+        </svg>
+        <h3>No folders yet</h3>
+        <p>Create your first folder to start organizing chats by topics</p>
+      </div>
+      <div id="foldersList" class="folders-list"></div>
+    </div>
+
+    <div id="createFolderModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Create New Folder</h3>
+          <button id="closeCreateModal" class="close-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m18 6-12 12M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="folderNameInput" placeholder="Enter folder name (e.g., 'Technology', 'Cooking')" class="input">
+          <p class="help-text">Choose a descriptive topic name. Chats will be matched to folders based on their content relevance to the folder name.</p>
+        </div>
+        <div class="modal-footer">
+          <button id="cancelCreate" class="btn btn-ghost">Cancel</button>
+          <button id="confirmCreate" class="btn btn-primary">Create Folder</button>
+        </div>
+      </div>
+    </div>
+    <div id="addToFolderModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Add Chat to Folder</h3>
+          <button id="closeAddModal" class="close-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m18 6-12 12M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="chat-preview">
+            <div class="chat-url" id="chatUrlPreview"></div>
+            <input type="text" id="chatTitleInput" placeholder="Enter chat title or description..." class="input">
+          </div>
+          <div class="folder-selection">
+            <label>Select folder:</label>
+            <div id="folderOptions" class="folder-options"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="cancelAdd" class="btn btn-ghost">Cancel</button>
+          <button id="confirmAdd" class="btn btn-primary">Add to Folder</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

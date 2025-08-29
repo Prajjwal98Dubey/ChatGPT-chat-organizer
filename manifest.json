@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "ChatGPT Chat Organizer",
+  "version": "1.0.0",
+  "description": "Organize your ChatGPT chats into topic-based folders",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ChatGPT Chat Organizer"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
